@@ -12,10 +12,14 @@ public class Test2 {
         University university = context.getBean("university", University.class);
         university.addStudents();
 
-        List<Student> students = university.getStudents(); // выполнился метод getStudents затем сразу выполнился advice AfterReturning
-        // и еще неуспело выполнится присвоение переменной students , как в методе AfterReturning advice мы поменяли первый элемент списка
-        // после завершения advice и присвоения первому элементу новых значений, переменной присвоился обновленный список который затем выводится
-        System.out.println(students);
+        try {
+            List<Student> students = university.getStudents(); // выполнился метод getStudents затем сразу выполнился advice AfterReturning
+            // и еще неуспело выполнится присвоение переменной students , как в методе AfterReturning advice мы поменяли первый элемент списка
+            // после завершения advice и присвоения первому элементу новых значений, переменной присвоился обновленный список который затем выводится
+        }catch(Exception e){
+            System.out.println("было поймано исключение");
+        }
+//        System.out.println(students);
 
         context.close();
     }
